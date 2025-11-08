@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DriveSphere — About</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script defer src="assets/js/cars-data.js"></script>
+    <script defer src="assets/js/about.js"></script>
+
+</head>
+
+<body>
+    <!-- Site header + primary navigation -->
+    <header class="site-header">
+        <h1>DriveSphere</h1>
+        <nav class="nav">
+            <a href="index.html">Welcome</a>
+            <a href="data.html">Data</a>
+            <a class="active" href="about.html">About</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- Hero section: intro text + illustrative image -->
+        <section class="hero">
+            <div class="copy">
+                <h2>About the website & creator</h2>
+                <p>
+                    This page explains who built DriveSphere and provides extra context and
+                    insights about the cars dataset used in the project.
+                </p>
+
+                <!-- Filled by about.js: name, country, age, email, bio -->
+                <div id="creatorCard" class="card" style="margin-top:.6rem;"></div>
+            </div>
+
+            <figure class="art">
+                <img id="aboutImg" src="assets/images/SportCar.jpg" alt="Sport car on the road" />
+                <figcaption>Why cars? Design, engineering and fun.</figcaption>
+            </figure>
+        </section>
+
+        <!-- Two-column panel: dataset insights (left) and fuel estimator (right) -->
+        <section class="panel">
+            <div class="panel-left">
+                <h3>Dataset background</h3>
+
+                <!-- Injected by about.js: total cars, distinct makes, colours distribution -->
+                <div id="datasetStats" class="card"></div>
+
+                <!-- Make → models demo. Select populated by about.js from global cars[] -->
+                <div class="form-grid" style="margin-top:.8rem;">
+                    <label>
+                        Filter models by make
+                        <select id="makeSelect">
+                            <option value="" disabled selected hidden>Select a make…</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+
+            <div class="panel-right">
+                <h3>Fuel cost estimator</h3>
+                <p class="muted">
+                    Enter your tank capacity, your average daily fuel usage and the current fuel price.
+                    We’ll estimate days per tank and your monthly spend.
+                </p>
+
+                <!-- Inputs listened by about.js; results rendered into #fuelResult -->
+                <form class="form-grid" id="fuelForm" autocomplete="off">
+                    <label>
+                        Tank capacity (L)
+                        <input id="tankCap" type="number" min="1" step="1" placeholder="e.g., 50" />
+                    </label>
+
+                    <label>
+                        Avg use per day (L/day)
+                        <input id="avgPerDay" type="number" min="0" step="0.1" placeholder="e.g., 3.2" />
+                    </label>
+
+                    <label>
+                        Fuel price (€/L)
+                        <input id="fuelPrice" type="number" min="0" step="0.01" placeholder="e.g., 1.89" />
+                    </label>
+
+                    <label>
+                        Month length (days)
+                        <select id="monthDays">
+                            <option value="30">30</option>
+                            <option value="31" selected>31</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                        </select>
+                    </label>
+
+                    <div class="form-actions">
+                        <button type="reset" class="btn ghost" id="fuelReset">Clear</button>
+                    </div>
+                </form>
+
+                <!-- Live summary rendered here by about.js -->
+                <div id="fuelResult" class="card" style="margin-top:.8rem;"></div>
+            </div>
+        </section>
+    </main>
+
+</body>
+
+</html>
