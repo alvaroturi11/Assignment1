@@ -60,6 +60,32 @@ const daysUntil = (isoDate) => {
 
 let previewCars = []; // holds temporary list of preview cars
 
+// Logos pictures
+const LOGOS = {
+  Ford: "ford.png",
+  Hyundai: "hyundai.png",
+  Toyota: "toyota.png",
+  Renault: "renault.png",
+  Nissan: "nissan.png",
+  Tesla: "tesla.png",
+  Audi: "audi.png",
+  Cupra: "cupra.png",
+  Fiat: "fiat.png",
+  Bmw: "bmw.png",
+  Mercedes: "mercedes.png",
+  Volkswagen: "volkswagen.png",
+  Peugeot: "peugeot.png",
+  Skoda: "skoda.png",
+  Kia: "kia.png",
+  Seat: "seat.png",
+  Opel: "opel.png",
+  Citroen: "citroen.png",
+  Volvo: "volvo.png",
+  Mazda: "mazda.png",
+  Honda: "honda.png"
+};
+
+
 // Generate card HTML based on user inputs
 const cardHTML = ({ brand, model, price, months, apr, itv }, idx) => {
   const pmt = monthlyPayment(price, apr, months);
@@ -67,10 +93,12 @@ const cardHTML = ({ brand, model, price, months, apr, itv }, idx) => {
   const safeBrand = titleCase(brand);
   const safeModel = titleCase(model);
 
+  const logoFile = LOGOS[safeBrand] || "NewCar.jpg";
+
   return `
     <article class="card">
-      <img src="assets/images/NewCar.jpg"
-        alt="Grey car" />
+      <img src="assets/images/${logoFile}"
+        alt="${safeBrand} logo" class="car-logo"/>
       <div class="meta">
         <h4>${safeBrand} ${safeModel}</h4>
         <div class="kpis">
@@ -153,6 +181,29 @@ clearAllBtn.addEventListener("click", () => {
   previewCars = [];
   renderAll();
 });
+
+// GALLERY ROLLOVER
+const galleryImg = document.querySelector("#galleryCar");
+
+if (galleryImg) {
+  const galleryFiles = [
+    "YellowLamborghini.jpg",
+    "photo2.jpg",
+    "photo3.jpg",
+    "photo4.jpg"
+  ];
+
+  let currentIndex = 0; // YellowLamborghini is the first picture
+
+  galleryImg.addEventListener("mouseenter", () => {
+    // advance to the next image (and return to the beginning at the end)
+    currentIndex = (currentIndex + 1) % galleryFiles.length;
+
+    // update image path
+    galleryImg.src = `assets/images/${galleryFiles[currentIndex]}`;
+  });
+
+}
 
 // Initialize months badge and render
 monthsBadge.textContent = monthsEl.value;
